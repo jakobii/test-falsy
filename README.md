@@ -34,7 +34,7 @@ Falsy Definitions
 - [string] Empty
 - [string] Whitespace
 - [dbnull] SqlServer
-- [null] SqlServer
+- $Null
 
 
 ### Alias
