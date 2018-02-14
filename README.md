@@ -52,7 +52,7 @@ Will cause Test-Falsy to write to the host the type that is matched if null is f
 - Alias: **-v**
 
 ### Alias
-The module will set *Test-Falsy* with an alias of ***tn***
+The module will set *Test-Falsy* with an alias of ***tf***
 
 
 # Examples
@@ -60,7 +60,7 @@ Evaluating blanks and nulls as falsy in powershell is not fun. This is a handy u
 
 If $Foo is null perform some action.
 ```powershell
-If(tn $Foo){
+If(tf $Foo){
     #DO SOMETHING..
 } 
 ```
@@ -70,17 +70,17 @@ Or Perform Some action until $Foo is no longer null.
 do{
     #DO SOMETHING..
 }
-until(tn $Foo -af) 
+until(tf $Foo -af) 
 ```
 
 Not having to worry if a string is null or emtpy is nice.
 ```powershell
 # Powershell converts $null into an empty string "" automatically
-[string]$foo = $null # A falsy value
+[string]$foo = $null
 
 # RETURNS [bool]False. Empty string is not equal to null.
 $foo -eq $null
 
-# RETURNS [bool]True. Empty string is Falsy to sane people.
-Test-Falsy -Evaluate $foo
+# RETURNS [bool]True. Empty strings are Falsy to sane people.
+tf $foo
 ```
