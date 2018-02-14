@@ -1,4 +1,4 @@
-Function Test-Null{
+Function Test-Null {
     <#
     .SYNOPSIS
     A powershell utility for evaluating nulls
@@ -32,10 +32,11 @@ Function Test-Null{
         Tested: Wednesday, February 14, 2018 9:30:14 AM
         Version: b1598d12-adbc-4103-81d2-7d20acdae168
     #>
-        param(
+    param(
     
         # the value you would like to check for null
         [parameter(Mandatory = $true)]
+        [AllowNull()]
         [alias("e")]    
         $Evaluate, 
         
@@ -46,47 +47,63 @@ Function Test-Null{
         [alias("v")]
         [switch]$verbosely 
         
-        ) 
+    ) 
     
-    
-        begin {
-            function Write-Success($Message) {write-host $Message -ForegroundColor 'Green'}
-            function Write-Note($Message) {write-host $Message -ForegroundColor 'Yellow'}
-            function write-Boolean([boolean]$Boolean) {
-                if ($Boolean -eq $true) {write-host ' TRUE ' -ForegroundColor 'Black' -BackgroundColor 'green'}
-                if ($Boolean -eq $false) {write-host ' FALSE ' -ForegroundColor 'White' -BackgroundColor 'Red'}
-            } 
-            [boolean]$IsNull = $False
+    begin {
+        function Write-Success($Message) {write-host $Message -ForegroundColor 'Green'}
+        function Write-Note($Message) {write-host $Message -ForegroundColor 'Yellow'}
+        function write-Boolean([boolean]$Boolean) {
+            if ($Boolean -eq $true) {write-host ' TRUE ' -ForegroundColor 'Black' -BackgroundColor 'green'}
+            if ($Boolean -eq $false) {write-host ' FALSE ' -ForegroundColor 'White' -BackgroundColor 'Red'}
+        } 
+        [boolean]$IsNull = $False
+    }
+    Process {
+        # Null
+        if ($Evaluate -eq $null) {
+            [boolean]$IsNull = $True
+            if ($Verbosely) {Write-Note "Value provided equals `$Null"}
         }
-        Process {
-            # Null
-            if ($Evaluate -eq $null) {
+        # DBNull
+        if ($Evaluate -is [DBNull]) {
+            [boolean]$IsNull = $True 
+            if ($Verbosely) {Write-Note "Value provided eqauls [DBNull]"}
+        }
+        # int
+        if ($Evaluate -is [int]) {
+            if ($Evaluate -eq 0) {
                 [boolean]$IsNull = $True
-                if ($Verbosely) {Write-Note "Value provided equals `$Null"}
-            }
-            # DBNull
-            if ($Evaluate -is [DBNull]) {
-                [boolean]$IsNull = $True 
-                if ($Verbosely) {Write-Note "Value provided eqauls [DBNull]"}
-            }
-            # Empty String
-            if ($Evaluate -is [String]) {
-                if ($Evaluate.Trim() -eq '') {
-                    [boolean]$IsNull = $True
-                    if ($Verbosely) {Write-Note "Value provided is an empty String"}
-                }
+                if ($Verbosely) {Write-Note "Value provided eqauls 0"}
             }
         }
-        end {
-            
-            if ($AsFalse) {
-                if ($Verbosely) {write-Boolean $(!$IsNull)}
-                Return !$IsNull
+        # Float
+        if ($Evaluate -is [float]) {
+            if ($Evaluate -eq 0) {
+                [boolean]$IsNull = $True
+                if ($Verbosely) {Write-Note "Value provided eqauls 0"}
             }
-            if ($AsFalse -eq $false) {
-                if ($Verbosely) {write-Boolean $IsNull}
-                Return $IsNull
+        }
+        # String
+        if ($Evaluate -is [String]) {
+            if ($Evaluate.Trim() -eq '') {
+                [boolean]$IsNull = $True
+                if ($Verbosely) {Write-Note "Value provided is an empty String"}
             }
-            
         }
     }
+    end {
+            
+        if ($AsFalse) {
+            if ($Verbosely) {write-Boolean $(!$IsNull)}
+            Return !$IsNull
+        }
+        if ($AsFalse -eq $false) {
+            if ($Verbosely) {write-Boolean $IsNull}
+            Return $IsNull
+        }
+            
+    }
+}
+
+Set-Alias -Value Test-Null -Name tn
+Export-ModuleMember -Function Test-Null -Alias tn
