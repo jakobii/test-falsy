@@ -1,4 +1,4 @@
-Function Test-Null {
+Function Test-Falsy {
     <#
     .SYNOPSIS
     A powershell utility for evaluating nulls
@@ -105,5 +105,5 @@ Function Test-Null {
     }
 }
 
-Set-Alias -Value Test-Null -Name tn
-Export-ModuleMember -Function Test-Null -Alias tn
+Set-Alias -Value Test-Falsy -Name tf
+Export-ModuleMember -Function Test-Falsy -Alias tf

@@ -1,28 +1,28 @@
-# test-null
-A null Checking Powershell Utility
+# Test-Falsy
+A Falsy Checking Powershell Utility
 
 
 # Getting Started
 
 1) Clone
 ```bash
-git clone https://github.com/jakobii/test-null.git
+git clone https://github.com/jakobii/test-falsy.git
 ```
 
 2) Import
 ```powershell
-import-module ".\test-null\test-null.psm1"
+import-module ".\test-falsy\test-falsy.psm1"
 ```
 
 3) Use
 ```powershell
-Test-Null -Evaluate $foo
+Test-Falsy -Evaluate $foo
 ```
 
 
 # Parameters
 ```powershell
-Test-Null -Evaluate <Any> [-AsFalse <switch>] [-Verbosely <Switch>] 
+Test-Falsy -Evaluate <Any> [-AsFalse <switch>] [-Verbosely <Switch>] 
 ```
 
 ### -Evaluate
@@ -40,19 +40,19 @@ The value that will be Evaluated as falsy.
 - Alias: **-e**
 
 ### -AsFalse
-Cause Test-Null to return [bool]$False when the value provided qualifies as blank or null.
+Cause Test-Falsy to return [bool]$False when the value provided qualifies as blank or null.
 - Parameter type: **Switch**
 - Required: **False**
 - Alias: **-af**
 
 ### -Verbosely
-Will cause Test-Null to write to the host the type that is matched if null is found.
+Will cause Test-Falsy to write to the host the type that is matched if null is found.
 - Parameter type: **Switch**
 - Required: **False**
 - Alias: **-v**
 
 ### Alias
-The module will set *Test-Null* with an alias of ***tn***
+The module will set *Test-Falsy* with an alias of ***tn***
 
 
 # Examples
@@ -82,5 +82,5 @@ Not having to worry if a string is null or emtpy is nice.
 $foo -eq $null
 
 # RETURNS [bool]True. Empty string is Falsy to sane people.
-Test-Null -Evaluate $foo
+Test-Falsy -Evaluate $foo
 ```
