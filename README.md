@@ -25,10 +25,10 @@ Test-Null "    " $foo
 ```powershell
 Test-Null -Evaluate <Any> [-AsFalse <switch>] [-Verbosely <Switch>] 
 ```
-## Alias
+### Alias
 The module will set Test-Null with an alias of ***tn***
 
-## Evaluate
+### Evaluate
 The value that will be Evaluated as falsy.
 - Falsy Values
     - [int] Zero
@@ -42,13 +42,13 @@ The value that will be Evaluated as falsy.
 - Required: **True**
 - Alias: **e**
 
-## AsFalse
+### AsFalse
 Cause Test-Null to return [bool]$False when the value provided qualifies as blank or null.
 - Parameter type: **Switch**
 - Required: **False**
 - Alias: **af**
 
-## Verbosely
+### Verbosely
 Will cause Test-Null to write to the host the type that is matched if null is found.
 - Parameter type: **Switch**
 - Required: **False**
