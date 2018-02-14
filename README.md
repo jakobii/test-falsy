@@ -28,7 +28,7 @@ Test-Falsy -Evaluate <undefined> [-AsFalse <switch>] [-Verbosely <switch>]
 ### Description
 ***Falsy*** is any value that should equal the boolean *false* when being evaluated by a [conditional statement](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators). Examples of Powershell conditional statements are *If* , *While* , *-eq* , and *-ne*. By default Test-Falsy returns the boolean TRUE to signify a positive match to a falsy definition.
 
-Falsy definitions
+Falsy Definitions
 - [int] Zero
 - [float] Zero
 - [string] Empty
