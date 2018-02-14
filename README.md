@@ -1,6 +1,5 @@
 # Test-Falsy
-A Falsy Checking Powershell Utility
-
+A Falsy Checking Powershell Utility. Evaluating falsy in powershell is not fun. This is a handy utility I include in almost all my scripts. Feel free to use it.
 
 # Getting Started
 
@@ -21,39 +20,40 @@ Test-Falsy -Evaluate $foo
 ```
 
 
-# Test-Falsy Parameter 
+# Parameter 
 ```powershell
 Test-Falsy -Evaluate <Any> [-AsFalse <switch>] [-Verbosely <Switch>] 
 ```
 
 ### Description
-Will return [bool]TRUE if the value provided equates to a qualifying Falsy definition
+***Falsy*** is any value that should equal the boolean *false* when being evaluated by a [conditional statement](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators). Examples of Powershell conditional statements are *If* , *While* , *-eq* , and *-ne*. By default Test-Falsy returns the boolean true to signify a positive match to a falsy definition.
+
+Falsy definitions
+- [int] Zero
+- [float] Zero
+- [string] Empty
+- [string] Whitespace
+- [dbnull] SqlServer
+- [null] SqlServer
+
 
 ### Alias
 The module will set *Test-Falsy* with an alias of ***tf***
 
 ### -Evaluate
 The value that will be tested as falsy.
-- Falsy Values
-    - [int] Zero
-    - [float] Zero
-    - [string] Empty
-    - [string] Whitespace
-    - [dbnull] SqlServer
-    - [null] SqlServer
-
 - Parameter type: **Undefined**
 - Required: **True**
 - Alias: **-e**
 
 ### -AsFalse
-Cause Test-Falsy to return [bool]FALSE when the value provided equates to a qualifying Falsy definition
+Causes Test-Falsy to return the boolean FALSE when the value provided equates to a qualifying Falsy definition
 - Parameter type: **Switch**
 - Required: **False**
 - Alias: **-af**
 
 ### -Verbosely
-Will cause Test-Falsy to write to the host the type that is matched if null is found.
+Will cause Test-Falsy to write to the host the falsy definition that is matched.
 - Parameter type: **Switch**
 - Required: **False**
 - Alias: **-v**
@@ -61,31 +61,19 @@ Will cause Test-Falsy to write to the host the type that is matched if null is f
 
 
 # Examples
-Evaluating blanks and nulls as falsy in powershell is not fun. This is a handy utility I include in almost all my scripts. These are some common situation I find myself in.
+These are some common situation I find myself in.
 
-If $Foo is null perform some action.
+If $Foo is falsy perform some action.
 ```powershell
 If(tf $Foo){
     #DO SOMETHING..
 } 
 ```
 
-Or Perform Some action until $Foo is no longer null.
+Or Perform Some action until $Foo is no longer falsy.
 ```Powershell
 do{
     #DO SOMETHING..
 }
 until(tf $Foo -af) 
-```
-
-Not having to worry if a string is null or emtpy is nice.
-```powershell
-# Powershell converts $null into an empty string "" automatically
-[string]$foo = $null
-
-# RETURNS [bool]False. Empty string is not equal to null.
-$foo -eq $null
-
-# RETURNS [bool]True. Empty strings are Falsy to sane people.
-tf $foo
 ```
