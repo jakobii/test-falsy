@@ -15,18 +15,25 @@ import-module ".\test-falsy\test-falsy.psm1"
 ```
 
 3) Use
+
 ```powershell
 Test-Falsy -Evaluate $foo
 ```
 
 
-# Parameters
+# Test-Falsy Parameter 
 ```powershell
 Test-Falsy -Evaluate <Any> [-AsFalse <switch>] [-Verbosely <Switch>] 
 ```
 
+### Description
+Will return [bool]TRUE if the value provided equates to a qualifying Falsy definition
+
+### Alias
+The module will set *Test-Falsy* with an alias of ***tf***
+
 ### -Evaluate
-The value that will be Evaluated as falsy.
+The value that will be tested as falsy.
 - Falsy Values
     - [int] Zero
     - [float] Zero
@@ -40,7 +47,7 @@ The value that will be Evaluated as falsy.
 - Alias: **-e**
 
 ### -AsFalse
-Cause Test-Falsy to return [bool]$False when the value provided qualifies as blank or null.
+Cause Test-Falsy to return [bool]FALSE when the value provided equates to a qualifying Falsy definition
 - Parameter type: **Switch**
 - Required: **False**
 - Alias: **-af**
@@ -51,8 +58,6 @@ Will cause Test-Falsy to write to the host the type that is matched if null is f
 - Required: **False**
 - Alias: **-v**
 
-### Alias
-The module will set *Test-Falsy* with an alias of ***tf***
 
 
 # Examples
