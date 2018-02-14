@@ -1,10 +1,10 @@
 Function Test-Falsy {
     <#
     .SYNOPSIS
-    A powershell utility for evaluating nulls
+    Falsy value checking
     
     .DESCRIPTION
-    will return [bool]TRUE if the value provided equates to a qualify Falsy definition
+    will return [bool]TRUE if the value matches a Falsy definition
 
     - qualifying Falsy Definitions
         - [int] Zero
@@ -19,7 +19,7 @@ Function Test-Falsy {
     The value that will be tested as falsy.
     
     .PARAMETER asFalse
-    Cause Test-Falsy to return [bool]$False when the value provided qualifies as blank or null.
+    Cause Test-Falsy to return [bool]$False when the value provided matches to Falsy definition.
     
     .PARAMETER verbosely
     Will cause Test-Falsy to write to the host the type that is matched if null is found.
@@ -28,18 +28,17 @@ Function Test-Falsy {
     
     # This string is just white space. 
     # This will return $True.
-    Test-Falsy -e '     ' 
+    Test-Falsy -Evaluate '     ' 
     
     # Common problem with getting data from SqlServer.
     # This will return $True. notice the alias 'tf'
     tf -e $([System.DBNull]::Value)
     
-    
     .NOTES
-        Status: STABLE
-        Tester: Jacob Ochoa
-        Tested: Wednesday, February 14, 2018 11:27:07 AM
-        Version: 78e1b998-f2f4-4def-9621-72f08c1cef41
+    Status: STABLE
+    Tester: Jacob Ochoa
+    Tested: Wednesday, February 14, 2018 11:27:07 AM
+    Version: 78e1b998-f2f4-4def-9621-72f08c1cef41
     #>
     param(
     
